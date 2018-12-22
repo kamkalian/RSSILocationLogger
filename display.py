@@ -86,7 +86,7 @@ class Display:
 class Symbol:
     # Mit Symbol kann man kleine 20x20 Bitmaps laden
     def __init__(self, file):
-        with open(file, 'rb') as f:
+        with open('symbols/' + file, 'rb') as f:
             f.readline()
             f.readline()
             f.readline()

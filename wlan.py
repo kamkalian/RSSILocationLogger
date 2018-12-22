@@ -1,15 +1,18 @@
 import network
+import ubinascii
 
 class Wlan():
 
     def __init__(self, ssid):
         self.ssid = ssid
+        self.ff_ap_bssid = ""
+
         self.wlan = network.WLAN(network.STA_IF)
         self.wlan.active(True)
         self.scan()
 
     def scan(self):
-        self.ff_list = []
+        ff_list = []
         ff_tmp_list = []
         ap_list = self.wlan.scan()
 
@@ -17,11 +20,12 @@ class Wlan():
             if (ap[0].decode() == self.ssid):
                 ff_tmp_list.append(ap)
         # sorted(ff_list, key=lambda x: x[3])
-        self.ff_list = sorted(ff_tmp_list, key=lambda x: -x[3])
+        ff_list = sorted(ff_tmp_list, key=lambda x: -x[3])
+        # self.ff_ap_bssid = ubinascii.hexlify(ff_list[0][1])
+        self.ff_ap_bssid = ff_list[0][1]
 
     def connect(self):
-        # self.wlan.connect(self.ssid, None, bssid=str(self.ff_list[0][1]))
-        return str(self.ff_list[0][1]).decode()
+        self.wlan.connect(ssid=self.ssid, password=None, bssid=self.ff_ap_bssid)
 
     def reconnect(self):
         self.scan()
