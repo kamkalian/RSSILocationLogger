@@ -25,7 +25,7 @@ class Wlan():
         self.ff_ap_bssid = ff_list[0][1]
 
     def connect(self):
-        self.wlan.connect(ssid=self.ssid, password=None, bssid=self.ff_ap_bssid)
+        self.wlan.connect(self.ssid, None, bssid=self.ff_ap_bssid)
 
     def reconnect(self):
         self.scan()

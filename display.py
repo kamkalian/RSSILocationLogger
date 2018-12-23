@@ -44,18 +44,18 @@ class Display:
         # self.oled.text("gprmc:"+str(gps.is_gprmc_ok), 0,0)
         # self.oled.text("fix:"+str(gps.is_fix()), 0,10)
         if(gps.is_gprmc_ok) or (gps.is_gpgga_ok):
-            self.oled.blit(self.gps_board_true.fbuf ,0, 0)
+            self.oled.blit(self.gps_board_true.fbuf, 0, 0)
         else:
-            self.oled.blit(self.gps_board_false.fbuf ,0, 0)
+            self.oled.blit(self.gps_board_false.fbuf, 0, 0)
         if(gps.is_fix):
-            self.oled.blit(self.fix_true.fbuf ,25, 0)
+            self.oled.blit(self.fix_true.fbuf, 25, 0)
             time = str(gps.time)
-            self.oled.text("time: " +time[:2 ] +": " +time[2:4 ] +": " +time[4:6], 0 ,41)
-            self.oled.text("hdop: " +str(gps.hdop), 0 ,33)
-            self.oled.text("lat: " +str(gps.lat), 0 ,49)
-            self.oled.text("lon: " +str(gps.lon), 0 ,57)
+            self.oled.text("time: " + time[:2] + ":" + time[2:4] + ":" + time[4:6], 0, 41)
+            self.oled.text("hdop: " + str(gps.hdop), 0, 33)
+            self.oled.text("lat: " + str(gps.lat), 0, 49)
+            self.oled.text("lon: " + str(gps.lon), 0, 57)
         else:
-            self.oled.blit(self.fix_false.fbuf ,25, 0)
+            self.oled.blit(self.fix_false.fbuf, 25, 0)
         # =============================================================================
         # 			self.oled.text("hdop: -", 0,33)
         # 			self.oled.text("time: -", 0,41)
@@ -63,14 +63,14 @@ class Display:
         # 			self.oled.text("lon: -", 0,57)
         # =============================================================================
 
-        if(quality):
+        if quality:
             self.oled.blit(self.quality.fbuf, 107, 0)
 
         self.oled.text("sat: " + str(gps.sats), 0, 25)
 
-        if(wlan.isconnected()):
+        if wlan.isconnected():
             self.oled.blit(self.ff_true.fbuf, 50, 0)
-            self.oled.text("rssi: " + str(wlan.get_rssi()), 64, 25)
+            self.oled.text(str(wlan.get_rssi()), 84, 25)
         else:
             self.oled.blit(self.ff_false.fbuf, 50, 0)
 

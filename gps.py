@@ -1,7 +1,7 @@
 import machine
 
 
-class Gps():
+class Gps:
 
     def __init__(self):
         self.fail_counter = 0
@@ -20,7 +20,7 @@ class Gps():
         self.is_gprmc_ok = False
         self.is_gpgga_ok = False
 
-        if (str(line).startswith("b'$GPRMC")):
+        if str(line).startswith("b'$GPRMC"):
             if (len(str(line).split(',')) == 13):
                 self.gprmc = str(line).split(',')
                 if (self.gprmc[2] == "A"):
@@ -31,7 +31,7 @@ class Gps():
                 self.is_gprmc_ok = True
                 self.fail_counter = 0
 
-        if (str(line).startswith("b'$GPGGA")):
+        if str(line).startswith("b'$GPGGA"):
             if (len(str(line).split(',')) == 15):
                 self.gpgga = str(line).split(',')
                 self.sats = int(self.gpgga[7])
@@ -42,7 +42,7 @@ class Gps():
                 self.is_gpgga_ok = True
                 self.fail_counter = 0
 
-        if (self.fail_counter > 10):
+        if self.fail_counter > 10:
             self.is_fix = False
             self.sats = 0
             self.hdop = 0
